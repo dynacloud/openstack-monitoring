@@ -34,6 +34,7 @@ usage ()
     echo "Usage: $0 [OPTIONS]"
     echo " -h               Get help"
     echo " -H <Auth URL>      URL for obtaining an auth token. Ex: http://localhost"
+    echo " -N <Neutron URL>      URL for obtaining an auth token. Ex: http://localhost"
     echo " -T <admin tenant>  Admin tenant name to get an auth token"
     echo " -U <username>      Username to use to get an auth token"
     echo " -P <password>      Password to use ro get an auth token"
@@ -48,6 +49,9 @@ do
             ;;
         H)
             export OS_AUTH_URL=$OPTARG
+            ;;
+        N)
+            export OS_NEUTRON_URL=$OPTARG
             ;;
         T)
             export OS_TENANT=$OPTARG
@@ -82,7 +86,7 @@ if [ -z "$TOKEN" ]; then
 fi
 
 START=`date +%s`
-NETWORKS=$(curl -s -H "X-Auth-Token: $TOKEN" -H "Content-type: application/json" http://localhost:9696/v2.0/networks)
+NETWORKS=$(curl -s -H "X-Auth-Token: $TOKEN" -H "Content-type: application/json" ${OS_NEUTRON_URL}:9696/v2.0/networks)
 END=`date +%s`
 
 TIME=$((END-START))
