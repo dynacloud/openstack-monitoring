@@ -31,7 +31,7 @@ STATE_DEPENDENT=4
 
 PID=$(pidof -x ceilometer-collector)
 
-if ! KEY=$(netstat -epta 2>/dev/null | grep $PID 2>/dev/null | grep amqp) || test -z $PID
+if ! KEY=$(netstat -epta 2>/dev/null | grep ceilometer 2>/dev/null | grep amqp) || test -z $PID
 then
     echo "Ceilometer Collector is not connected to AMQP."
     exit $STATE_CRITICAL
