@@ -93,7 +93,7 @@ TIME=$((END-START))
 
 PID=$(ps -ef | grep quantum-server | grep python | awk {'print$2'} | head -n 1)
 
-if ! test -z $PID || test -z "$NETWORKS"
+if test -z $PID || test -z "$NETWORKS"
 then
     echo "Neutron server is down."
     exit $STATE_CRITICAL
