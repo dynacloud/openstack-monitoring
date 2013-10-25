@@ -31,7 +31,7 @@ STATE_DEPENDENT=4
 
 PID=$(pidof -x ceilometer-agent-compute)
 
-if ! KEY=$(netstat -epta 2>/dev/null | grep $PID 2>/dev/null | grep amqp) || test -z $PID
+if ! KEY=$(netstat -epta 2>/dev/null | grep ceilometer 2>/dev/null | grep amqp) || test -z $PID
 then
     echo "Ceilometer Compute Agent is not connected to AMQP."
     exit $STATE_CRITICAL
